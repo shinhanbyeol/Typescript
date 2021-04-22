@@ -73,3 +73,5 @@ fabric.properties
 
 .idea/
 .idea/*
+/quiz/2_address-book/node_modules
+/quiz/1_todo/node_modules
