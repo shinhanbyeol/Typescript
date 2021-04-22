@@ -8,6 +8,7 @@ npm version 6.9.0
 npm install typescript -g
 ```
 * [TypeScript](https://www.typescriptlang.org/)
+* [타입스크립트 핸드북](https://joshua1988.github.io/ts/)
 * [JSdoc](https://devdocs.io/jsdoc/)
 * [타입스크립트 설정 파일 옵션(문서)](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
 * [타입스크립트 플레이그라운드](https://www.typescriptlang.org/play)
