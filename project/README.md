@@ -11,7 +11,10 @@
     - [X] 'tsc' 명령어로 타입스크립트 변환  
 2. 명시적인 `any` 선언하기
    - `tsconfig.json` 파일에 `noImplicitAny` 값을 `true`로 추가
-
+   - 가능한한 구체적인 타입으로 타입 정의
+3. 프로젝트 환경구성
+   - babel, eslint, prettier등의 환경 설정.
+4. 외부 라이브러리 모듈화
 ```
    npm init -y
    npm i -D typescript @babel/core @babel/preset-env @babel/preset-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint prettier eslint-plugin-prettier
