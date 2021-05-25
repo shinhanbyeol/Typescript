@@ -1,6 +1,7 @@
 // 라이브러리 로딩
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import * as Chart from 'chart.js';
+import { CountrySummaryResponse, CovidSummaryResponse } from './covid/index';
 // utils
 function $(selector: string) {
   return document.querySelector(selector);
@@ -12,13 +13,13 @@ function getUnixTimestamp(date: Date) {
 // DOM
 // Element | HTMLElement |
 const confirmedTotal = $('.confirmed-total') as HTMLSpanElement;
-const deathsTotal = $('.deaths') as HTMLParagraphElement;
+const deathsTotal = $('.death') as HTMLParagraphElement;
 const recoveredTotal = $('.recovered') as HTMLParagraphElement;
 const lastUpdatedTime = $('.last-updated-time') as HTMLParagraphElement;
 const rankList = $('.rank-list');
-const deathsList = $('.deaths-list');
+const deathsList = $('.death-list');
 const recoveredList = $('.recovered-list');
-const deathSpinner = createSpinnerElement('deaths-spinner');
+const deathSpinner = createSpinnerElement('death-spinner');
 const recoveredSpinner = createSpinnerElement('recovered-spinner');
 
 function createSpinnerElement(id: any) {
@@ -41,7 +42,7 @@ let isDeathLoading = false;
 const isRecoveredLoading = false;
 
 // api
-function fetchCovidSummary() {
+function fetchCovidSummary(): Promise<AxiosResponse<CovidSummaryResponse>> {
   const url = 'https://api.covid19api.com/summary';
   return axios.get(url);
 }
@@ -52,8 +53,11 @@ enum CovidStatus {
   Deaths = 'deaths',
 }
 
-function fetchCountryInfo(countryCode: string, status: CovidStatus) {
-  // params: confirmed, recovered, deaths
+function fetchCountryInfo(
+  countryCode: string,
+  status: CovidStatus
+): Promise<AxiosResponse<CountrySummaryResponse>> {
+  // params: confirmed, recovered, death
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
 }
@@ -117,7 +121,7 @@ function setDeathsList(data: any) {
     li.setAttribute('class', 'list-item-b flex align-center');
     const span = document.createElement('span');
     span.textContent = value.Cases;
-    span.setAttribute('class', 'deaths');
+    span.setAttribute('class', 'death');
     const p = document.createElement('p');
     p.textContent = new Date(value.Date).toLocaleDateString().slice(0, -1);
     li.appendChild(span);
